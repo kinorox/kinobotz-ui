@@ -16,8 +16,13 @@ const router = createRouter({
     routes
 });
 
+var url = 'https://kinobotz.herokuapp.com';
+if(process.env.NODE_ENV === 'development') {
+    url = 'http://localhost:5000';
+}
+
 const connection = new HubConnectionBuilder()
-    .withUrl('https://kinobotz.herokuapp.com/overlayHub')
+    .withUrl(url + '/overlayHub')
     .build();
 
 createApp(App)

@@ -1,13 +1,14 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import OverlayApp from '@/components/OverlayApp.vue';
+import HomeApp from '@/HomeApp.vue';
+import OverlayApp from '@/OverlayApp.vue';
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { VueSignalR } from '@dreamonkey/vue-signalr';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import 'bootstrap'
 
 const routes = [
-    { path: '/', name: 'home', component: App },
+    { path: '/', name: 'home', component: HomeApp },
     { path: '/overlay/:id', name: 'overlay', component: OverlayApp }
 ];
 

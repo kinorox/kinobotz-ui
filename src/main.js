@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from '@/App.vue';
 import HomeApp from '@/HomeApp.vue';
 import OverlayApp from '@/OverlayApp.vue';
+import GptBehaviorApp from '@/GptBehaviorApp.vue';
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { VueSignalR } from '@dreamonkey/vue-signalr';
 import { HubConnectionBuilder } from '@microsoft/signalr';
@@ -9,7 +10,8 @@ import 'bootstrap'
 
 const routes = [
     { path: '/', name: 'home', component: HomeApp },
-    { path: '/overlay/:id', name: 'overlay', component: OverlayApp }
+    { path: '/overlay/:id', name: 'overlay', component: OverlayApp },
+    { path: '/gptbehavior', name: 'gptbehavior', component: GptBehaviorApp }
 ];
 
 const router = createRouter({
@@ -19,7 +21,7 @@ const router = createRouter({
 
 var url = 'https://kinobotz.herokuapp.com';
 if(process.env.NODE_ENV === 'development') {
-    url = 'http://localhost:5000';
+    url = 'https://localhost:44305';
 }
 
 const connection = new HubConnectionBuilder()

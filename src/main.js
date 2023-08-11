@@ -11,7 +11,8 @@ import 'bootstrap'
 const routes = [
     { path: '/', name: 'home', component: HomeApp },
     { path: '/overlay/:id', name: 'overlay', component: OverlayApp },
-    { path: '/gptbehavior', name: 'gptbehavior', component: GptBehaviorApp }
+    { path: '/gptbehavior', name: 'gptbehavior', component: GptBehaviorApp },
+    { path: '/login', name: 'twitchlogin', component: GptBehaviorApp }
 ];
 
 const router = createRouter({

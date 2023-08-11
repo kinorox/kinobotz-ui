@@ -1,5 +1,8 @@
 <script>
-    export default {
+    import TwitchLogin from './TwitchLogin.vue';
+
+    export default {  
+        components: { TwitchLogin },
         name: 'NavBar'
     }
 </script>
@@ -17,6 +20,9 @@
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link active" aria-current="page" to="/gptbehavior">gpt behavior</router-link>
+                </li>
+                <li class="nav-item">
+                    <TwitchLogin/>
                 </li>
             </ul>
         </div>

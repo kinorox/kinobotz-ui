@@ -3,7 +3,8 @@ import App from '@/App.vue';
 import HomeApp from '@/HomeApp.vue';
 import OverlayApp from '@/OverlayApp.vue';
 import GptBehaviorApp from '@/GptBehaviorApp.vue';
-import { createRouter, createWebHashHistory } from 'vue-router'
+import CallbackApp from '@/CallbackApp.vue';
+import { createRouter, createWebHistory } from 'vue-router'
 import { VueSignalR } from '@dreamonkey/vue-signalr';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import 'bootstrap'
@@ -12,11 +13,11 @@ const routes = [
     { path: '/', name: 'home', component: HomeApp },
     { path: '/overlay/:id', name: 'overlay', component: OverlayApp },
     { path: '/gptbehavior', name: 'gptbehavior', component: GptBehaviorApp },
-    { path: '/login', name: 'twitchlogin', component: GptBehaviorApp }
+    { path: '/callback', name: 'callback', component: CallbackApp }
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 });
 

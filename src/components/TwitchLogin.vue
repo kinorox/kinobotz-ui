@@ -6,11 +6,11 @@
         try {
           const clientId = 'lzszb9tfwd5w3czq84agigf5lih1ur';
 
-          let redirectUri = 'https://k1no.tv';
+          let redirectUri = 'https://k1no.tv/callback';
           if(process.env.NODE_ENV === 'development') {
-            redirectUri = 'http://localhost:8080/#/';
+            redirectUri = 'http://localhost:8080/callback';
           }
-          const responseType = 'token';
+          const responseType = 'code';
           const scopes = 'user:read:email analytics:read:games user:edit:broadcast channel:read:subscriptions channel:read:redemptions channel:manage:broadcast user:read:subscriptions user:read:follows channel:read:polls channel:read:predictions channel:read:vips';
 
           const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?response_type=${responseType}&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}`;

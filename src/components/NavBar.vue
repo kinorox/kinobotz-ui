@@ -1,9 +1,22 @@
 <script>
     import TwitchLogin from './TwitchLogin.vue';
+    import Cookies from 'js-cookie';
+    import router from '@/scripts/router'
 
     export default {  
         components: { TwitchLogin },
-        name: 'NavBar'
+        name: 'NavBar',
+        computed: {
+            userLoggedIn() {
+                return Cookies.get('jwtToken');
+            },
+        },
+        methods: {
+            logoff() {
+                Cookies.remove('jwtToken');
+                router.push('/')
+            }
+        }
     }
 </script>
 
@@ -15,14 +28,17 @@
                 <li class="nav-item">
                     <router-link class="nav-link active" aria-current="page" to="/">home</router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link active" aria-current="page" to="/overlay/55b7c1e0-1800-436c-a500-7094e8981257">overlay</router-link>
+                <li v-if="!userLoggedIn" class="nav-item">
+                    <TwitchLogin/>
                 </li>
-                <li class="nav-item">
+                <li v-if="userLoggedIn" class="nav-item">
                     <router-link class="nav-link active" aria-current="page" to="/gptbehavior">gpt behavior</router-link>
                 </li>
-                <li class="nav-item">
-                    <TwitchLogin/>
+                <li v-if="userLoggedIn" class="nav-item">
+                    <router-link class="nav-link active" aria-current="page" to="/dashboard">dashboard</router-link>
+                </li>
+                <li v-if="userLoggedIn" class="nav-item">
+                    <button @click="logoff()">Logout</button>
                 </li>
             </ul>
         </div>

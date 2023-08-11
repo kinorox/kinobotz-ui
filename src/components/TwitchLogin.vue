@@ -20,7 +20,7 @@
         } catch (error) {
           console.error('Login error:', error);
         }
-      },
+      }
     },
   };
 </script>

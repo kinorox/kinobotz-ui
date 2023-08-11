@@ -1,20 +1,15 @@
 <script>
 import NavBar from './components/NavBar.vue';
 import axios from 'axios';
+import router from '@/scripts/router'
+import { mapActions } from 'vuex';
+import Cookies from 'js-cookie';
 
 export default {
     name: "CallbackApp",
     components: { NavBar },
     mounted() {
-
-        // Get the current URL
-        const currentUrl = window.location.href;
-
-        // Create a URL object
-        const urlObj = new URL(currentUrl);
-
-        // Get the value of the "code" parameter
-        const code = urlObj.searchParams.get("code"); 
+        var code = this.extractTokenFromUrl();
         
         var url = 'https://kinobotz.herokuapp.com';
         if(process.env.NODE_ENV === 'development') {
@@ -23,16 +18,30 @@ export default {
 
         let redirectUri = 'https://k1no.tv/callback';
         if(process.env.NODE_ENV === 'development') {
-        redirectUri = 'http://localhost:8080/callback';
+            redirectUri = 'http://localhost:8080/callback';
         }
 
         axios.post(url + '/twitch/login', {
             AccessToken: code,
             RedirectUri: redirectUri
-        }).then(() => {
-            console.log('nice')
+        }).then((response) => {
+            this.handleSuccessfulAuth(response.data.accessToken)
         });
-    }
+    },
+    methods: {
+        extractTokenFromUrl() {
+            const currentUrl = window.location.href;
+            const urlObj = new URL(currentUrl);
+            const code = urlObj.searchParams.get("code"); 
+
+            return code;
+        },
+        handleSuccessfulAuth(token) {
+            Cookies.set('jwtToken', token, { expires: 30 });
+            router.push('/dashboard')
+        },
+        ...mapActions(['saveJwtToken']),
+    },
 }
 </script>
 
